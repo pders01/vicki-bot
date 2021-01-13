@@ -3,9 +3,11 @@ import * as controllers from "./controllers";
 import { Server } from "@overnightjs/core";
 import { Logger } from "@overnightjs/logger";
 import * as cors from "cors";
+
 export class AppServer extends Server {
   private readonly SERVER_STARTED = "Server started on port: ";
-
+  
+  
   constructor() {
     super(true);
     this.app.use(bodyParser.json());

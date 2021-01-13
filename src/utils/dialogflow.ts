@@ -10,14 +10,14 @@ const sessionClient = new dialogflow.SessionsClient({
 });
 const projectId: string = process.env.DIALOGFLOW_PROJECT_ID!;
 
-export const runQuery = (query: string) => {
+export const runQuery = (query: string, from: string) => {
   return new Promise(async (resolve, reject) => {
     try {
       // A unique identifier for the given session
-      const sessionId = uuidv4();
+      const sessionId = from;
       //const sessionId = number;
       // Create a new session
-
+      console.log("dialogflow:", projectId, sessionId)
       const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
       // The text query request.

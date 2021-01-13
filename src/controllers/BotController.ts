@@ -7,10 +7,13 @@ import { runQuery } from "../utils/dialogflow";
 export class BotController {
   @Post()
   private postMessage(request: Request, response: Response) {
+    // we have to set headers for CORS; in production * has to be changed to the actual domain the requests come from 
+    response.setHeader('Access-Control-Allow-Origin', '*');
     // Here we get the message body, the id to which we're sending the message and where it comes from.
     const { Body, To, From } = request.body;
     // Here we're sending the received message to Dialogflow (dialogflow.ts) so that it can be identified against an Intent.
-    runQuery(Body)
+    console.log(Body, From)  
+    runQuery(Body, From)
       .then((result: any) => {
       // Now the fulfillment text has to make its way back to the frontend
       const message = {
@@ -21,7 +24,7 @@ export class BotController {
           }
       }  
       console.log(message)
-      return response.status(200).send(message); 
+      return response.status(200).json(message); 
       })
       .catch((error) => {
         console.error("error is ", error);
