@@ -17,7 +17,7 @@ export const runQuery = (query: string, from: string) => {
       const sessionId = from;
       //const sessionId = number;
       // Create a new session
-      console.log("dialogflow:", projectId, sessionId)
+      //console.log("dialogflow:", projectId, sessionId)
       const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
       // The text query request.
@@ -35,8 +35,9 @@ export const runQuery = (query: string, from: string) => {
 
       // Send request and log result
       const responses = await sessionClient.detectIntent(request);
-
+      // console.log("RESPONSE-df:" + JSON.stringify(responses) + "END")
       const result = responses[0].queryResult;
+      // console.log(JSON.stringify(result))
       resolve(result);
     } catch (error) {
       reject(error);
