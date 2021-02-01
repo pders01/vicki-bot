@@ -1,0 +1,13 @@
+{
+	"apps": [
+	  {
+	    "name": "vicki",
+	    "script": "src/start.ts",
+	    "interpreter": "ts-node",
+	    "env": {
+		"ENV": "prod",
+		"PORT": "3000"
+	    }
+	  }
+	]
+}
