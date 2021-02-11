@@ -1,0 +1,7 @@
+---
+# tasks file for /etc/ansible/roles/vicki
+#
+  - import_tasks: node.yml
+  - import_tasks: pm2.yml
+  - import_tasks: nginx.yml
+  - import_tasks: credentials.yml

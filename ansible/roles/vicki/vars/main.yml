@@ -1,0 +1,8 @@
+---
+# vars file for /etc/ansible/roles/vicki
+#
+homeDir: /
+appDir: vicki
+repo: vicki-bot
+account: pders01
+nodejs.version: 12

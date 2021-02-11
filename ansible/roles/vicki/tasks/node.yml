@@ -1,0 +1,43 @@
+---
+  - name: Install git curl
+    apt:
+      name: ['git', 'curl']                                        
+      state: latest
+      update_cache: true
+  
+  - name:
+    apt_key:
+      url: "http://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+
+  - name: add nodejs repository
+    apt_repository:
+      repo: "{{ item }}"
+      state: present
+      update_cache: yes
+    with_items:
+      - "deb http://deb.nodesource.com/node_12.x {{ ansible_lsb.codename }} main"
+      - "deb-src http://deb.nodesource.com/node_12.x {{ ansible_lsb.codename }} main"
+
+  - name: install nodejs
+    apt:
+      name: ['nodejs', 'yarn']
+      state: present
+
+  - name: Install pm2
+    npm: name=pm2 global=yes production=yes
+  
+  - name: Enable typescript support for pm2
+    npm:  name=typescript global=yes production=yes
+
+  - name: Create Vicki Directory
+    file: path={{homeDir}}/{{appDir}} state=directory
+
+  - name: Clone Github repo
+    git: repo=https://github.com/{{account}}/{{repo}}.git dest={{homeDir}}/{{appDir}} update=yes force=yes 
+    register: git_finished
+
+  - name: Running NPM install
+    npm: path={{homeDir}}/{{appDir}}
+    register: npm_finished
+    when: git_finished.changed
+  

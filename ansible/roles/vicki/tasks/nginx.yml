@@ -1,0 +1,40 @@
+---  
+  - name: Install nginx        
+    apt:
+      name: ['nginx']
+      state: present
+        
+  - name: Disable nginx default virtual host       
+    command: 
+      cmd: unlink /etc/nginx/sites-enabled/default
+
+  - name: Create nginx conf file for vicki
+    file:
+      path: /etc/nginx/sites-available/reverse-proxy.conf
+      state: touch
+
+  - name: Amend nginx conf file
+    blockinfile:
+      path: /etc/nginx/sites-available/reverse-proxy.conf
+      marker: ""
+      block: |
+        server {
+        	listen 80;
+                location / {
+                        proxy_pass http://127.0.0.1:3000;
+                }
+        }
+
+  - name: Link nginx vicki reverse proxy
+    ansible.builtin.file:
+      src: /etc/nginx/sites-available/reverse-proxy.conf
+      dest: /etc/nginx/sites-enabled/reverse-proxy.conf
+      owner: root
+      group: root
+      state: link
+
+  - name: Ensuring nginx is running
+    service:
+      name: nginx
+      state: restarted
+      enabled: yes

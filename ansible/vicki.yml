@@ -1,0 +1,7 @@
+---
+  - hosts: vicki
+    become: yes
+    name: Install and configure the necessary dependencies for vicki in prod, as well as vicki itself
+    roles:
+    - vicki
+

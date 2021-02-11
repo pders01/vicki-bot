@@ -1,0 +1,11 @@
+---
+
+  - name: Ensure pm2 is running
+    command: "pm2 ping"
+
+  - name:  Typscript support for pm2
+    command: chdir={{homeDir}}/{{appDir}} pm2 install typescript pm2.json
+
+  - name: Run pm2 for vicki
+    command: chdir={{homeDir}}/{{appDir}} pm2 start /vicki/pm2.json --watch
+
