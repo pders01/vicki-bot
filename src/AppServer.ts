@@ -5,7 +5,7 @@ import { Logger } from "@overnightjs/logger";
 import * as cors from "cors";
 
 export class AppServer extends Server {
-  private readonly SERVER_STARTED = "Server started on port: ";
+  private readonly SERVER_STARTED = "Server started!";
   
   
   constructor() {
@@ -29,10 +29,10 @@ export class AppServer extends Server {
 
   public start(port: number): void {
     this.app.get("*", (req, res) => {
-      res.send(this.SERVER_STARTED + port);
+      res.send(this.SERVER_STARTED);
     });
     this.app.listen(port, () => {
-      Logger.Imp(this.SERVER_STARTED + port);
+      Logger.Imp(this.SERVER_STARTED);
     });
   }
 }

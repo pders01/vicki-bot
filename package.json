@@ -9,7 +9,7 @@
     "dev": "ts-node src/start.ts",
     "dev:watch": "nodemon",
     "build": "rm -rf ./build/ && tsc",
-    "start": "node build/start.js"
+    "start": "NODE_ENV=production node build/start.js"
   },
   "keywords": [],
   "author": "",
