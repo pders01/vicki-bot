@@ -12,7 +12,7 @@ export class BotController {
     // Here we get the message body, the id to which we're sending the message and where it comes from.
     const { Body, From } = request.body;
     // Here we're sending the received message to Dialogflow (dialogflow.ts) so that it can be identified against an Intent.
-    runQuery(Body, From)
+    runQuery(Body, Language_Code)
       .then((result: any) => {
       // Now the fulfillment text has to make its way back to the frontend
       const message = {

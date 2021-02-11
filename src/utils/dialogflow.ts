@@ -10,14 +10,16 @@ const sessionClient = new dialogflow.SessionsClient({
 });
 const projectId: string = process.env.DIALOGFLOW_PROJECT_ID!;
 
-export const runQuery = (query: string, from: string) => {
+export const runQuery = (query: string, language_code: string) => {
   return new Promise(async (resolve, reject) => {
     try {
       // A unique identifier for the given session
-      const sessionId = from;
+      const sessionId = uuid.v4();
       // Create a new session
       const sessionPath = sessionClient.sessionPath(projectId, sessionId);
-
+      if (!request.language_code) {
+	const language_code = "de-DE" 
+	}
       // The text query request.
       const request = {
         session: sessionPath,
@@ -25,8 +27,8 @@ export const runQuery = (query: string, from: string) => {
           text: {
             // The query to send to the dialogflow agent
             text: query,
-            // The language used by the client (en-US)
-            languageCode: "de-DE"
+            // The language used by the client, depends on 
+            languageCode: language_code
           }
         }
       };
