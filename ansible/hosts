@@ -18,7 +18,6 @@
 [vicki]
 #vicki 1
 #vicki 2
-172.105.250.70 ansible_ssh_pass=KQ8FYRmKcPJEpzb4upYDYoWzfghPQq2F ansible_ssh_user=root
 
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
