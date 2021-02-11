@@ -14,12 +14,9 @@ export const runQuery = (query: string, language_code: string) => {
   return new Promise(async (resolve, reject) => {
     try {
       // A unique identifier for the given session
-      const sessionId = uuid.v4();
+      const sessionId = uuidv4();
       // Create a new session
       const sessionPath = sessionClient.sessionPath(projectId, sessionId);
-      if (!request.language_code) {
-	const language_code = "de-DE" 
-	}
       // The text query request.
       const request = {
         session: sessionPath,

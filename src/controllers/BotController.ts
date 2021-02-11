@@ -10,13 +10,13 @@ export class BotController {
     // we have to set headers for CORS; in production * has to be changed to the actual domain the requests come from 
     response.setHeader('Access-Control-Allow-Origin', '*');
     // Here we get the message body, the id to which we're sending the message and where it comes from.
-    const { Body, From } = request.body;
+    request.body.Language_Code = request.body.Language_Code || 'de-DE';
+    const { Body, Language_Code } = request.body;
     // Here we're sending the received message to Dialogflow (dialogflow.ts) so that it can be identified against an Intent.
     runQuery(Body, Language_Code)
       .then((result: any) => {
       // Now the fulfillment text has to make its way back to the frontend
-      const message = {
-        ID: From,  
+      const message = {  
         message: { 
           Body: result.fulfillmentMessages
         }
